@@ -1,0 +1,20 @@
+variables:
+  CI_PROJECT_GROUP: "<add group name from gitlab>"
+  CI_PROJECT_NAME_PUBLIC: "<add public name, then add with segment to appsettings.json(GitLabSwaggerPrefix)>"
+  CI_PROJECT_URL_PATH: "<add public name, then add with segment to appsettings.json(GitLabSwaggerPrefix)>"
+
+include:
+  - project: 'build-images/templates/cicd-template'
+    ref: version-build-deploy
+    file: '.main-jira.yml'
+
+stages:
+  - version
+  - merge-request-check
+  - jira-check
+  - connections-check
+  - build
+  - pre-deploy
+  - jira-update
+  - jira-check-and-deploy
+  - jira-update-after-deploy

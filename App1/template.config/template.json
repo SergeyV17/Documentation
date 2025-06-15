@@ -1,0 +1,28 @@
+  {
+    "author": "Sergey Vlasenko",
+    "name": "HOFF Vertical Slice Template",
+    "description": "Hoff Vertical Slice Template.",
+    "identity": "HOFF.App1.1.0",
+    "shortName": "verticalslicetemplate",
+    "tags": {
+      "language": "C#",
+      "type": "project"
+    },
+    "sourceName": "App1",
+    "symbols": {
+      "Framework": {
+        "type": "parameter",
+        "description": "The target framework for the project.",
+        "datatype": "choice",
+        "choices": [
+          {
+            "choice": "net5.0"
+          },
+          {
+            "choice": "net6.0"
+          }
+        ],
+        "defaultValue": "net6.0"
+      }
+    }
+  }

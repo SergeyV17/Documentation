@@ -1,0 +1,5 @@
+EnvVars:
+  APP_ENV: "staging"
+  DOTNET_ENVIRONMENT: "Staging"
+  HealthCheckPort: 8080
+  MetricsPort: 80

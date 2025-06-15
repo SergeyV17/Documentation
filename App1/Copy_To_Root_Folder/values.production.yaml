@@ -1,0 +1,5 @@
+EnvVars:
+  APP_ENV: "prod"
+  DOTNET_ENVIRONMENT: "Production"
+  HealthCheckPort: 8080
+  MetricsPort: 80
