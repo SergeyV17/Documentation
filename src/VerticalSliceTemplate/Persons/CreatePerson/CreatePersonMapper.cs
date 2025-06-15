@@ -18,7 +18,8 @@ namespace VerticalSliceApi.Persons.CreatePerson
         public CreatePersonMapper()
         {
             this.CreateMap<CreatePersonCommand, Person>()
-                .ForMember(dest => dest.PersonId, opt => opt.MapFrom(src => Guid.NewGuid()));
+                .ForMember(dest => dest.PersonId, opt => opt.MapFrom(src => Guid.NewGuid()))
+                .ForMember(dest => dest.GenderAsInt, opt => opt.Ignore());
         }
     }
 }

@@ -17,6 +17,7 @@ using MediatR;
 
 using Microsoft.Extensions.Caching.Distributed;
 
+using VerticalSliceApi.Persons.CreatePerson.BusinessRules;
 using VerticalSliceApi.Persons.Shared;
 using VerticalSliceApi.Persons.Shared.Entities;
 
@@ -28,15 +29,18 @@ namespace VerticalSliceApi.Persons.CreatePerson
     [Endpoint("api/v1/persons", "POST")]
     public class CreatePersonCommandHandler : IRequestHandler<CreatePersonCommand, Guid>
     {
+        private readonly BusinessRulesChecker businessRulesChecker;
         private readonly IUnitOfWorkProvider unitOfWorkProvider;
         private readonly IDistributedCache cache;
         private readonly IMapper mapper;
 
         public CreatePersonCommandHandler(
+            BusinessRulesChecker businessRulesChecker,
             IUnitOfWorkProvider unitOfWorkProvider,
             IDistributedCache cache,
             IMapper mapper)
         {
+            this.businessRulesChecker = businessRulesChecker;
             this.unitOfWorkProvider = unitOfWorkProvider;
             this.cache = cache;
             this.mapper = mapper;
@@ -44,6 +48,7 @@ namespace VerticalSliceApi.Persons.CreatePerson
 
         public async Task<Guid> Handle(CreatePersonCommand command, CancellationToken cancellationToken)
         {
+            this.businessRulesChecker.CheckAdult(command);
             await this.cache.RemoveAsync(PersonCacheKeys.PersonsList, cancellationToken).ConfigureAwait(false);
             var person = this.mapper.Map<Person>(command);
             await this.CreatePersonAsync(person, cancellationToken);
