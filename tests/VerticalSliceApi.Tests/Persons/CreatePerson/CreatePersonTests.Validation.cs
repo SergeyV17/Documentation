@@ -10,8 +10,6 @@ using FluentAssertions;
 
 using FluentValidation;
 
-using Gems.Mvc.Filters.Exceptions;
-
 using Microsoft.AspNetCore.Http;
 
 using NUnit.Framework;
